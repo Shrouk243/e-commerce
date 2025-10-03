@@ -1,5 +1,5 @@
 
-"use server";
+"use client";
 
 import getMyToken from "@/utilities/getMyToken";
 
@@ -8,10 +8,16 @@ import getMyToken from "@/utilities/getMyToken";
 export default async function AddToCart(id:string) {
 try{
     const token = await getMyToken();
+    console.log("Token:", token);
+console.log("ProductId:", id); getMyToken();
+
 
   if (!token) {
     throw new Error("Please login to be able to add product");
   }
+
+console.log("Token:", token);
+console.log("ProductId:", id);
 
   const res = await fetch("https://ecommerce.routemisr.com/api/v1/cart", {
     method: "POST",
@@ -27,6 +33,7 @@ try{
   }
 
   const payload = await res.json();
+  console.log("Cart Response:", payload);
   return payload;
 } catch (err){
   return err
